@@ -1,0 +1,10 @@
+[package]
+name = "purescript-contravariant"
+version = "3.0.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-either = "^3.0.0"
+purescript-monoid = "^3.0.0"
+purescript-tuples = "^4.0.0"

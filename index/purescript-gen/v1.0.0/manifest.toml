@@ -1,0 +1,12 @@
+[package]
+name = "purescript-gen"
+version = "1.0.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-unfoldable = "^3.0.0"
+purescript-tailrec = "^3.0.0"
+purescript-nonempty = "^4.0.0"
+purescript-integers = "^3.0.0"
+purescript-tuples = "^4.0.0"

@@ -1,0 +1,8 @@
+[package]
+name = "purescript-symbols"
+version = "1.0.1"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-unsafe-coerce = "^1.0.0"

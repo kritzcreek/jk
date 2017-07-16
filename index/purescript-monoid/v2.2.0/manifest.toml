@@ -1,0 +1,10 @@
+[package]
+name = "purescript-monoid"
+version = "2.2.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-newtype = "^1.0.0"
+purescript-control = "^2.0.0"
+purescript-invariant = "^2.0.0"

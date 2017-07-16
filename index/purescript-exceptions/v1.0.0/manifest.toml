@@ -1,0 +1,10 @@
+[package]
+name = "purescript-exceptions"
+version = "1.0.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-either = "^1.0.0"
+purescript-maybe = "^1.0.0"
+purescript-eff = "^1.0.0"

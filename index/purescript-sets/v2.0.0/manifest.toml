@@ -1,0 +1,9 @@
+[package]
+name = "purescript-sets"
+version = "2.0.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-maps = "^2.0.0"
+purescript-tailrec = "^2.0.0"

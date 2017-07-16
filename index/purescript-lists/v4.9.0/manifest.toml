@@ -1,0 +1,12 @@
+[package]
+name = "purescript-lists"
+version = "4.9.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-unfoldable = "^3.0.0"
+purescript-lazy = "^3.0.0"
+purescript-tailrec = "^3.3.0"
+purescript-nonempty = "^4.0.0"
+purescript-partial = "^1.0.0"

@@ -1,0 +1,11 @@
+[package]
+name = "purescript-integers"
+version = "2.1.1"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-maybe = "^2.0.0"
+purescript-globals = "^2.0.0"
+purescript-math = "^2.0.0"
+purescript-partial = "^1.1.2"

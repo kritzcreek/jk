@@ -1,0 +1,12 @@
+[package]
+name = "purescript-generics"
+version = "3.2.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-proxy = "^1.0.0"
+purescript-either = "^2.0.0"
+purescript-arrays = "^3.0.0"
+purescript-strings = "^2.0.0"
+purescript-identity = "^2.0.0"

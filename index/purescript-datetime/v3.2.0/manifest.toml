@@ -1,0 +1,13 @@
+[package]
+name = "purescript-datetime"
+version = "3.2.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-foldable-traversable = "^3.0.0"
+purescript-generics = "^4.0.0"
+purescript-integers = "^3.0.0"
+purescript-math = "^2.0.0"
+purescript-enums = "^3.1.0"
+purescript-functions = "^3.0.0"

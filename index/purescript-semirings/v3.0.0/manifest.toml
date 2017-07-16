@@ -1,0 +1,8 @@
+[package]
+name = "purescript-semirings"
+version = "3.0.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-lists = "^3.0.0"

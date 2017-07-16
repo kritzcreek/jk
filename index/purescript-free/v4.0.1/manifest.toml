@@ -1,0 +1,11 @@
+[package]
+name = "purescript-free"
+version = "4.0.1"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-exists = "^3.0.0"
+purescript-unsafe-coerce = "^3.0.0"
+purescript-transformers = "^3.0.0"
+purescript-catenable-lists = "^4.0.0"

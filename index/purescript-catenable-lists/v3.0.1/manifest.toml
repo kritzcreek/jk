@@ -1,0 +1,12 @@
+[package]
+name = "purescript-catenable-lists"
+version = "3.0.1"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-control = "^2.0.0"
+purescript-unfoldable = "^2.0.0"
+purescript-foldable-traversable = "^2.0.0"
+purescript-tuples = "^3.0.0"
+purescript-lists = "^3.0.0"

@@ -1,0 +1,9 @@
+[package]
+name = "purescript-const"
+version = "2.0.0"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-foldable-traversable = "^2.0.0"
+purescript-contravariant = "^2.0.0"

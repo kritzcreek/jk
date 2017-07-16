@@ -1,0 +1,8 @@
+[package]
+name = "purescript-lazy"
+version = "1.0.1"
+compiler = ">= 0.11.5"
+authors = ["author"]
+
+[dependencies]
+purescript-monoid = "^1.0.0"
