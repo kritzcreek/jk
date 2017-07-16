@@ -92,7 +92,7 @@ getPackage package = do
     (Just cachedVar, _) -> return cachedVar
     (Nothing, Nothing) -> error "no matching packages?"
     (_, Just pDesc) -> do
-      self <- PackageVar package <$> (Z3.mkFreshBoolVar (toS (renderOneLine package)))
+      self <- PackageVar <$> Z3.mkFreshBoolVar (toS (renderOneLine package))
       modify $ \ s@SolverState{solverPackages = pkgs} -> s{solverPackages = Map.insert package self pkgs}
       mdeps <- getDescription pDesc
       traverse_ (Z3.assert <=< Z3.mkImplies (packageVarVar self)) mdeps
@@ -123,6 +123,28 @@ getLatestVersion pkgName = do
       -- but we want them in descending...
       in step $ Map.foldlWithKey (\xs k _ -> k:xs) [] ve
 
+splitPackageNameAndVersion :: Map Package PackageVar -> Map PackageName (Map SemVer PackageVar)
+splitPackageNameAndVersion = Map.fromListWith Map.union . fmap step . Map.toList where
+  step (k, v) = (packageName k, Map.singleton (packageVersion k) v)
+
+getDistinctVersion
+  :: PackageName
+  -> SolverT Z3 AST
+getDistinctVersion pkgName = do
+  pkgs <- splitPackageNameAndVersion <$> gets solverPackages
+  case Map.lookup pkgName pkgs of
+    Just k ->
+     case Map.elems k of
+       [] -> error "cannot make an empty set distinct?"
+       [x] -> return $ packageVarVar x
+       xs -> do
+         z <- Z3.mkInteger 0
+         o <- Z3.mkInteger 1
+         let distinct l = Z3.mkIte (packageVarVar l) o z
+         assigned <- Z3.mkAdd =<< traverse distinct xs
+         Z3.mkEq assigned o
+    Nothing -> trace ("assertDistinctVersion couldn't find: " ++ show pkgName) Z3.mkFalse 
+
 getInstallationPlan
   :: Set (PackageName, SemVerRange) -- ^ Packages to install
   -> SolverT Z3 (Set Package)
@@ -148,29 +170,7 @@ getInstallationPlan desiredPackages = do
 
   solved <- Z3.withModel $ \model -> do
     packages <- gets solverPackages
-    filterM (\(_, PackageVar _ var) -> maybe False identity <$> Z3.evalBool model var) (Map.toList packages)
+    filterM (\(_, PackageVar var) -> maybe False identity <$> Z3.evalBool model var) (Map.toList packages)
   case solved of
     (Z3.Sat, Just ps) -> pure (Set.fromList (map fst ps))
     _ -> error "Failed to solve"
-
-splitPackageNameAndVersion :: Map Package PackageVar -> Map PackageName (Map SemVer PackageVar)
-splitPackageNameAndVersion = Map.fromListWith Map.union . fmap step . Map.toList where
-  step (k, v) = (packageName k, Map.singleton (packageVersion k) v)
-
-getDistinctVersion
-  :: PackageName
-  -> SolverT Z3 AST
-getDistinctVersion pkgName = do
-  pkgs <- splitPackageNameAndVersion <$> gets solverPackages
-  case Map.lookup pkgName pkgs of
-    Just k ->
-     case Map.elems k of
-       [] -> error "cannot make an empty set distinct?"
-       [x] -> return $ packageVarVar x
-       xs -> do
-         z <- Z3.mkInteger 0
-         o <- Z3.mkInteger 1
-         let distinct l = Z3.mkIte (packageVarVar l) o z
-         assigned <- Z3.mkAdd =<< traverse distinct xs
-         Z3.mkEq assigned o
-    Nothing -> trace ("assertDistinctVersion couldn't find: " ++ show pkgName) Z3.mkFalse 

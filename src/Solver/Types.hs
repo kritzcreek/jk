@@ -39,6 +39,5 @@ data Package = Package
   } deriving (Show, Eq, Ord)
 
 data PackageVar = PackageVar
-  { packageVarPackage :: Package
-  , packageVarVar :: AST
+  { packageVarVar :: AST
   } deriving (Show, Eq, Ord)
