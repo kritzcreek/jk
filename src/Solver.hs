@@ -37,11 +37,8 @@ getDependency (name, verRange) = do
 
       case filter (SemVer.matches verRange) (Map.keys vers) of
         [] -> do
-          traceShowM ("name", name)
-          traceShowM ("verRange", verRange)
-          traceShowM ("vers", vers)
-          -- traceShowM ("pkgs", pkgs)
-          error "no versions within range"
+          -- Didn't find any matching versions. This branch needs to be pruned
+          Just <$> Z3.mkBool False
         xs -> Just <$> somePackage xs
 
     Nothing -> do
