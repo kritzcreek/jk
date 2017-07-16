@@ -1,0 +1,35 @@
+name:                jk
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/kritzcreek/jk#readme
+license:             MIT
+author:              kritzcreek
+maintainer:          christoph.hegemann1337@gmail.com
+copyright:           2017 Christoph Hegemann
+category:            Web
+extra-source-files:
+- README.md
+
+ghc-options:
+  -Wall -Werror
+
+dependencies:
+  - base >= 4.7 && < 5
+  - z3
+  - containers
+  - semver-range
+  - text
+  - unordered-containers
+  - aeson
+  - protolude
+  - htoml
+  - directory
+  - filepath
+  - transformers
+  - mtl
+
+executables:
+  jk:
+    source-dirs:      src
+    main:             Main.hs
